@@ -1,7 +1,36 @@
-
+import React from 'react';
 import { motion } from 'framer-motion';
+import { Tv, Newspaper, Mic } from 'lucide-react';
 
-const PreciseHealth = () => {
+const mediaAppearances = [
+  {
+    category: "TV & Radio Appearances",
+    icon: <Tv className="w-6 h-6" />,
+    items: [
+      "NDTV, CNBC Awaaz",
+      "Radio Indigo (FM 91.9 Bangalore)",
+    ],
+  },
+  {
+    category: "Print & Digital Media Features",
+    icon: <Newspaper className="w-6 h-6" />,
+    items: [
+      "Business Standard & other reputed health magazines",
+    ],
+  },
+  {
+    category: "Medical Talks & Guest Speaker Invitations",
+    icon: <Mic className="w-6 h-6" />,
+    items: [
+      "Obesity India 2024 – Roles of Micronutrients in Obesity Management",
+      "Pregnancy Study Group (PSG) – Medical Nutrition Therapy in Gestational Diabetes",
+      "CME, Sri Devaraj URs Medical College – Intermittent Fasting & Type-2 Diabetes",
+      "Chief Guest Talks – Women's Day & Food Wastage Awareness",
+    ],
+  },
+];
+
+const MediaPresence = () => {
   return (
     <section className="py-16 px-4 md:px-6 bg-gradient-to-br from-blue-50 to-white">
       <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
@@ -9,33 +38,70 @@ const PreciseHealth = () => {
           initial={{ opacity: 0, x: -50 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
+          className="relative grid grid-cols-2 gap-4"
         >
-          <h2 className="text-3xl font-bold mb-6">
-            Leave Your Worries At The<br />Door And Enjoy A Healthier,<br />More Precise Health.
-          </h2>
-          <p className="text-gray-600 mb-8">
-            We care about your health and well-being. Our team of experts is dedicated to providing you with personalized care that meets your unique needs.
-          </p>
-          <button className="bg-blue-600 text-white px-8 py-3 rounded-full hover:bg-blue-700 transition-colors">
-            Book an Appointment
-          </button>
+          {[
+            "https://images.unsplash.com/photo-1590650153855-d9e808231d41?auto=format&fit=crop&q=80",
+            "https://images.unsplash.com/photo-1551966775-a4ddc8df052b?auto=format&fit=crop&q=80",
+            "https://images.unsplash.com/photo-1557425493-6f90ae4659fc?auto=format&fit=crop&q=80",
+            "https://images.unsplash.com/photo-1598257006626-48b0c252070d?auto=format&fit=crop&q=80",
+            "https://images.unsplash.com/photo-1579389083078-4e7018379f7e?auto=format&fit=crop&q=80",
+          ].map((image, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className={`overflow-hidden rounded-full ${
+                index === 4 ? "col-span-2 w-2/3 mx-auto" : ""
+              }`}
+            >
+              <img
+                src={image}
+                alt="Media Appearance"
+                className="w-full h-full object-cover aspect-square"
+              />
+            </motion.div>
+          ))}
         </motion.div>
 
         <motion.div
           initial={{ opacity: 0, x: 50 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
-          className="relative"
         >
-          <img
-            src="https://images.unsplash.com/photo-1512069772995-ec65ed45afd6?auto=format&fit=crop&q=80"
-            alt="Healthy Food"
-            className="rounded-2xl shadow-xl"
-          />
+          <h2 className="text-3xl font-bold mb-4">Media & Events</h2>
+          <h3 className="text-xl font-semibold text-blue-600 mb-6">
+            Recognized Health Expert Featured on Leading Platforms
+          </h3>
+          <p className="text-gray-600 mb-8">
+            As a recognized Diet & Diabetes Expert, I am regularly invited as a speaker and panelist on TV channels, medical forums, and universities to share insights on nutrition, lifestyle diseases, and diabetes management. I have spoken at leading medical conferences, debates, and talk shows, training doctors and medical students on the latest advancements in diet-based disease management. My expertise has been featured on NDTV, CNBC Awaaz, Business Standard, and reputed health magazines, reinforcing my commitment to public health awareness and education.
+          </p>
+
+          <div className="space-y-6">
+            {mediaAppearances.map((category, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3, delay: index * 0.1 }}
+              >
+                <div className="flex items-center gap-3 text-blue-600 mb-3">
+                  {category.icon}
+                  <h4 className="font-semibold">{category.category}</h4>
+                </div>
+                <ul className="space-y-2 pl-9">
+                  {category.items.map((item, itemIndex) => (
+                    <li key={itemIndex} className="text-gray-700">✔ {item}</li>
+                  ))}
+                </ul>
+              </motion.div>
+            ))}
+          </div>
         </motion.div>
       </div>
     </section>
   );
 };
 
-export default PreciseHealth;
+export default MediaPresence;
